@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:web_app/components/default_button.dart';
-import 'package:web_app/components/my_outline_button.dart';
-import 'package:web_app/constants.dart';
 
+import '../../components/default_button.dart';
+import '../../components/my_outline_button.dart';
+import '../../constants.dart';
 import 'components/about_section_text.dart';
 import 'components/about_text_with_sign.dart';
 import 'components/experience_card.dart';
@@ -42,7 +42,7 @@ class AboutSection extends StatelessWidget {
               MyOutlineButton(
                 imageSrc: "assets/images/hand.png",
                 text: "Hire Me!",
-                press: () {},
+                press: _launchEmail,
               ),
               SizedBox(width: kDefaultPadding * 1.5),
               DefaultButton(
@@ -66,6 +66,20 @@ class AboutSection extends StatelessWidget {
       await launchUrl(url, mode: LaunchMode.externalApplication); // Open in a new tab
     } else {
       throw 'Could not launch $url';
+    }
+  }
+
+  void _launchEmail() async {
+    final emailUri = Uri(
+      scheme: 'mailto',
+      path: 'raifelts@gmail.com', // Your email address
+      query: Uri.encodeQueryComponent('Subject: Inquiry'), // Optional subject
+    );
+
+    if (await canLaunchUrl(emailUri)) {
+      await launchUrl(emailUri);
+    } else {
+      throw 'Could not launch email client';
     }
   }
 }

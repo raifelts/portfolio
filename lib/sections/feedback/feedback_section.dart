@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:web_app/components/section_title.dart';
 import 'package:web_app/constants.dart';
 import 'package:web_app/models/Feedback.dart';
-
 import 'components/feedback_card.dart';
 
 class FeedbackSection extends StatelessWidget {
@@ -23,7 +22,7 @@ class FeedbackSection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: List.generate(
               feedbacks.length,
-              (index) => FeedbackCard(index: index),
+                  (index) => FeedbackCard(index: index),
             ),
           ),
         ],

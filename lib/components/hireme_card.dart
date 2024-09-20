@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart'; // Make sure this is imported
 
 import '../constants.dart';
 import 'default_button.dart';
@@ -52,10 +53,24 @@ class HireMeCard extends StatelessWidget {
             text: "Hire Me!",
             color: Colors.deepPurple,
             imageSrc: "assets/images/hand.png",
-            press: () {},
+            press: _launchEmail, // Update the press function
           )
         ],
       ),
     );
+  }
+
+  void _launchEmail() async {
+    final emailUri = Uri(
+      scheme: 'mailto',
+      path: 'raifelts@gmail.com', // Your email address
+      query: Uri.encodeQueryComponent('Subject: Inquiry'), // Optional subject
+    );
+
+    if (await canLaunchUrl(emailUri)) {
+      await launchUrl(emailUri);
+    } else {
+      throw 'Could not launch email client';
+    }
   }
 }
